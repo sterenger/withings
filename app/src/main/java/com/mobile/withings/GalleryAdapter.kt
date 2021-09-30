@@ -9,13 +9,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.mobile.withings.R
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_search.view.*
 import java.util.*
 
 
 class DataAdapter(
     private val context: Context,
-    private val ImgUrls: Array<String>
+    private val ImgUrls: ArrayList<String>
 ) :
     RecyclerView.Adapter<DataAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
@@ -30,7 +29,7 @@ class DataAdapter(
         Picasso.get()
             .load(Uri.parse(ImgUrls[i]))
             .noPlaceholder()
-            .into(viewHolder.img_android)
+            .into(viewHolder.imgSearch)
     }
 
     override fun getItemCount(): Int {
@@ -39,12 +38,8 @@ class DataAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        var img_android: ImageView
+        var imgSearch: ImageView = view.findViewById<View>(R.id.img_android) as ImageView
 
-        init {
-            img_android =
-                view.findViewById<View>(R.id.img_android) as ImageView
-        }
     }
 
 }

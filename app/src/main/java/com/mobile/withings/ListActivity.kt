@@ -15,6 +15,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
+
+
+
 class ListActivity : AppCompatActivity() {
 
     var searchList = ArrayList<ImageResult>()
@@ -30,20 +34,22 @@ class ListActivity : AppCompatActivity() {
         getData(searchWord.toString())
         val adapter = ListAdapter(searchList)
         rvItemsSearch.adapter = adapter
-        rvItemsSearch.layoutManager= LinearLayoutManager(this)
         adapter.onItemClick = { item ->
             var resultSearch = selectedItems.find { s -> s == item.webformatURL }
-            if (resultSearch != null) {
-                selectedItems.removeAt(selectedItems.indexOf(item.webformatURL))
-            }else{
+            if (resultSearch == null) {
                 selectedItems.add(item.webformatURL)
+                item.isSelected = true
+            }else{
+                selectedItems.removeAt(selectedItems.indexOf(item.webformatURL))
+                item.isSelected = false
             }
             btnShowImages.isEnabled = selectedItems.size >= 2
         }
+
         btnShowImages.setOnClickListener{
             val intentDetail = Intent(this@ListActivity, DetailActivity::class.java)
-            intentDetail.putStringArrayListExtra(SELECTED_DATA, selectedItems)
-              startActivity(intentDetail)
+            intentDetail.putStringArrayListExtra(SELECTED_DATA, selectedItems as ArrayList<String?>?)
+            startActivity(intentDetail)
         }
     }
 

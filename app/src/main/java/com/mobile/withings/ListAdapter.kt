@@ -2,6 +2,7 @@ package com.mobile.withings
 
 import android.graphics.Color
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,13 @@ class ListAdapter(var searchResultItems: List<ImageResult>) : RecyclerView.Adapt
         init {
             itemView.setOnClickListener {
                 onItemClick?.invoke(searchResultItems[adapterPosition])
-                itemView.setBackgroundColor(Color.parseColor("#ff0000"))
+                if(searchResultItems[adapterPosition].isSelected == true){
+                    itemView.setBackgroundColor(Color.parseColor("#ff0000"))
+                }else{
+                    itemView.setBackgroundColor(Color.parseColor("#ffffff"))
+                }
+
+
             }
         }
     }

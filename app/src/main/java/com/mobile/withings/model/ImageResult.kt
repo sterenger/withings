@@ -26,5 +26,5 @@ data class ImageResult(
     val webformatHeight: Int,
     val webformatURL: String,
     val webformatWidth: Int,
-    val isSelected : Boolean?= false
+    var isSelected : Boolean?= false
 )
